@@ -17,6 +17,9 @@ let minuteFinPause = ref(0); // Créé une minute de fin de pause réactive
 let heureDepart = ref(0); // Créé une heure de départ réactive
 let minuteDepart = ref(0); // Créé une minute de départ réactive
 
+let heuresBase = ref(0); // Créé les heures de base réactives
+let minutesBase = ref(0); // Créé les minutes de base réactives
+
 let total = ref(0); // Créé un total réactif
 
 const calculerTemps = () => { // Créé une fonction calculerTemps
@@ -79,6 +82,8 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 		<h1>Calculateurs</h1>
 		<h2>Heures</h2>
 		<div>
+			<h3>Heures actuelles</h3>
+			<input type="number" v-model="heuresBase">h <input type="number" v-model="minutesBase">min
 			<h3>Arivée</h3>
 			<input type="number" v-model="heureArrivee" />:<input type="number" v-model="minuteArrivee" />
 
@@ -98,10 +103,12 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 
 			<h3>Resultat</h3>
 			<button @click="calculerTemps">Calculer</button>
-			<h4>Total</h4>
+			<h4>Travail aujourd'hui</h4>
 			<p>{{ Math.floor(total / 60) }}h {{ total % 60 }}min</p>
 			<h4>Gagné</h4>
 			<p>{{ Math.floor((total - 450) / 60) }}h {{ (total - 450) % 60 }}min</p>
+			<h4>Total</h4>
+			<p>{{ Math.floor((total - 450 + minutesBase) / 60) + heuresBase }}h {{ (total - 450 + minutesBase) % 60 }}min</p>
 		</div>
 		<hr />
 
