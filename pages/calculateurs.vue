@@ -58,17 +58,19 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 		<hr />
 
 		<h2>Moyennes</h2>
-		<input type="text" placeholder="Note" v-model="noteText"> -
-		<input type="text" placeholder="Coefficient" v-model="coeffText">%
-		<button @click="addNote">Ajouter</button>
-		<ul>
-			<li v-for="note, index in notes">
-				<button @click="() => { removeNote(index); }">X</button>
-				<!--/* Utilisation d'une fonction anonyme pour passer un paramètre*/-->
-				{{ note.note }} - {{ note.coefficient }}%
-			</li>
-		</ul>
-		<span>Moyenne: {{ moyenne }}</span>
+		<div>
+			<input type="text" placeholder="Note" v-model="noteText"> -
+			<input type="text" placeholder="Coefficient" v-model="coeffText">%
+			<button @click="addNote">Ajouter</button>
+			<ul>
+				<li v-for="note, index in notes">
+					<button @click="() => { removeNote(index); }">X</button>
+					<!--/* Utilisation d'une fonction anonyme pour passer un paramètre*/-->
+					{{ note.note }} - {{ note.coefficient }}%
+				</li>
+			</ul>
+			<span>Moyenne: {{ moyenne }}</span>
+		</div>
 	</div>
 </template>
 
