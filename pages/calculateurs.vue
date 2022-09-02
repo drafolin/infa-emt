@@ -9,7 +9,7 @@ let notes = ref<number[]>([]); // Reference to the array of numbers
 		<hr />
 		<h2>Moyennes</h2>
 		<ul>
-			<li v-for="note in notes"></li>
+			<li v-for="note in notes">{{ note }}</li>
 		</ul>
 	</div>
 </template>
