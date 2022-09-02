@@ -5,6 +5,29 @@ let noteText = ref(""), coeffText = ref(""); /* Créé les variables noteText et
 let notes = ref<{ note: number; coefficient: number; }[]>([]); // Créé un tableau de notes réactives
 let moyenne = ref(0); // Créé une moyenne réactive
 
+let heureArrivee = ref(0); // Créé une heure d'arrivée réactive
+let minuteArrivee = ref(0); // Créé une minute d'arrivée réactive
+
+let heureDebutPause = ref(0); // Créé une heure de début de pause réactive
+let minuteDebutPause = ref(0); // Créé une minute de début de pause réactive
+
+let heureFinPause = ref(0); // Créé une heure de fin de pause réactive
+let minuteFinPause = ref(0); // Créé une minute de fin de pause réactive
+
+let heureDepart = ref(0); // Créé une heure de départ réactive
+let minuteDepart = ref(0); // Créé une minute de départ réactive
+
+let total = ref(0); // Créé un total réactif
+
+const calculerTemps = () => { // Créé une fonction calculerTemps
+	let debutPause = heureDebutPause.value * 60 + minuteDebutPause.value; // Créé une variable debutPause
+	let finPause = heureFinPause.value * 60 + minuteFinPause.value; // Créé une variable finPause
+	let arrivee = heureArrivee.value * 60 + minuteArrivee.value; // Créé une variable arrivee
+	let depart = heureDepart.value * 60 + minuteDepart.value; // Créé une variable depart
+
+	total.value = depart - arrivee - (finPause - debutPause); // Créé une variable total
+};
+
 onMounted(() => {
 	notes.value = JSON.parse(localStorage.getItem("notes") || "[]"); // Récupère les notes sauvegardées dans le localStorage
 });
@@ -55,6 +78,31 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 	<div>
 		<h1>Calculateurs</h1>
 		<h2>Heures</h2>
+		<div>
+			<h3>Arivée</h3>
+			<input type="number" v-model="heureArrivee" />:<input type="number" v-model="minuteArrivee" />
+
+			<h3>Pause</h3>
+			<div>
+				<h4>Début</h4>
+				<input type="number" v-model="heureDebutPause" />:<input type="number" v-model="minuteDebutPause" />
+			</div>
+
+			<div>
+				<h4>Fin</h4>
+				<input type="number" v-model="heureFinPause" />:<input type="number" v-model="minuteFinPause" />
+			</div>
+
+			<h3>Départ</h3>
+			<input type="number" v-model="heureDepart" />:<input type="number" v-model="minuteDepart" />
+
+			<h3>Resultat</h3>
+			<button @click="calculerTemps">Calculer</button>
+			<h4>Total</h4>
+			<p>{{ Math.floor(total / 60) }}h {{ total % 60 }}min</p>
+			<h4>Gagné</h4>
+			<p>{{ Math.floor((total - 450) / 60) }}h {{ (total - 450) % 60 }}min</p>
+		</div>
 		<hr />
 
 		<h2>Moyennes</h2>
