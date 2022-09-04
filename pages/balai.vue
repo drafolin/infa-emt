@@ -48,7 +48,7 @@ const disabled = (personne: string, week: number) => {
 			<div>Personne</div>
 			<div v-for="week in 39">{{week}}</div>
 			<template v-for="person in people" :key="person">
-				<div>{{person}}</div>
+				<div>{{person}} - {{fait.get(person).filter(v=>v).length}}</div>
 				<input type="checkbox" v-for="week in 39" :key="week" :disabled="disabled(person, week)"
 					:value="fait.get(person)[week]" @click="() => {toggle(person, week)}" />
 			</template>
@@ -62,5 +62,9 @@ const disabled = (personne: string, week: number) => {
 	grid-template-columns: repeat(40, 1fr);
 	grid-template-rows: repeat(8, 1fr);
 	text-align: center
+}
+
+.table>* {
+	height: 40px;
 }
 </style>
