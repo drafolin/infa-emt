@@ -1,39 +1,34 @@
 <script setup lang="ts">
-	const people = [
-		"Odin",
-		"Chloé",
-		"Xavier",
-		"Maximilien",
-		"Mathilde",
-		"Ethan",
-		"Michaël",
-		"Rayan"
-	]
 
-let fait = ref(new Map<String, boolean[]>())
+let fait = ref((await $fetch("/api/balai")).body.fait)
 
-for (const personne of people) {
-	for (let week = 0; week < 39; week++) {
-		fait.value.set(personne, [...fait.value?.get(personne) || [], false])
-	}
-}
+let personnes = ref<string[]>((await $fetch("/api/balai")).body.noms)
 
 const toggle = (personne: string, week: number) => {
-	let temp = fait.value.get(personne)
+	let temp = fait.value[personne]
 	temp[week] = !temp[week]
-	fait.value.set(personne, temp)
+	fait.value[personne] = temp
+
+	$fetch("/api/balai", {
+		method: "POST",
+		body: JSON.stringify({
+			nom: personne,
+			week: week,
+			fait: fait.value[personne][week]
+		})
+	})
 }
 
 const disabled = (personne: string, week: number) => {
-	if(fait.value.get(personne)[week]) {
+	if(fait.value[personne][week]) {
 		return false
 	}
 	let count = 0
-	fait.value.forEach((v, k) => {
+	for (let k in fait.value) {
 		if (k !== personne) {
-			if (v[week]) count++
+			if (fait.value[k][week]) count++
 		}
-	})
+	}
 	if (count > 2) {
 		console.log("Parameters: ", personne, week, "Passed")
 	}
@@ -47,10 +42,10 @@ const disabled = (personne: string, week: number) => {
 		<div class="table">
 			<div>Personne</div>
 			<div v-for="week in 39">{{week}}</div>
-			<template v-for="person in people" :key="person">
-				<div>{{person}} - {{fait.get(person).filter(v=>v).length}}</div>
+			<template v-for="person in personnes" :key="person">
+				<div>{{person}} - {{fait[person].filter(v=>v).length}}</div>
 				<input type="checkbox" v-for="week in 39" :key="week" :disabled="disabled(person, week)"
-					:value="fait.get(person)[week]" @click="() => {toggle(person, week)}" />
+					:value="fait[person][week]" @click="() => {toggle(person, week)}" />
 			</template>
 		</div>
 	</div>
