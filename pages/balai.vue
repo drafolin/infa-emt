@@ -63,8 +63,4 @@ const disabled = (personne: string, week: number) => {
 	grid-template-rows: repeat(8, 1fr);
 	text-align: center
 }
-
-.table>div {
-	display: grid;
-}
 </style>
