@@ -13,7 +13,7 @@ let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string
 			<div v-for="week in 39">{{week}}</div>
 			<template v-for="person in personnes" :key="person">
 				<div>{{person}} - {{fait[person].filter(v=>v).length}}</div>
-				<input type="checkbox" v-for="week in 39" :key="week" disabled :checked="fait[person][week]" />
+				<input type="checkbox" v-for="week in 39" :key="week" :checked="fait[person][week]" />
 			</template>
 		</div>
 	</div>
@@ -29,5 +29,9 @@ let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string
 
 .table>* {
 	height: 40px;
+}
+
+input[type=checkbox] {
+	pointer-events: none
 }
 </style>
