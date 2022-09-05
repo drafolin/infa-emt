@@ -1,7 +1,10 @@
 <template>
 	<div>
 		Inf2A
-		<NuxtLink to="/">Accueil</NuxtLink>
-		<NuxtLink to="/calculateurs">Calculateurs</NuxtLink>
+		<nav>
+			<NuxtLink to="/">Accueil</NuxtLink>
+			<NuxtLink to="/calculateurs">Calculateurs</NuxtLink>
+			<NuxtLink to="/balai">Balai</NuxtLink>
+		</nav>
 	</div>
 </template>
