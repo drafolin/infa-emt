@@ -3,23 +3,6 @@
 let fait = ref((await $fetch("/api/balai") as {body: {fait: Map<string, boolean[]>}}).body.fait)
 
 let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string[]}}).body.noms)
-
-
-const disabled = (personne: string, week: number) => {
-	if(fait.value[personne][week]) {
-		return false
-	}
-	let count = 0
-	for (let k in fait.value) {
-		if (k !== personne) {
-			if (fait.value[k][week]) count++
-		}
-	}
-	if (count > 2) {
-		console.log("Parameters: ", personne, week, "Passed")
-	}
-	return count >= 2
-}
 </script>
 
 <template>
@@ -30,7 +13,7 @@ const disabled = (personne: string, week: number) => {
 			<div v-for="week in 39">{{week}}</div>
 			<template v-for="person in personnes" :key="person">
 				<div>{{person}} - {{fait[person].filter(v=>v).length}}</div>
-				<input type="checkbox" v-for="week in 39" :key="week" disabled :checked="fait[person][week]" />
+				<input type="checkbox" v-for="week in 39" :key="week" :checked="fait[person][week]" />
 			</template>
 		</div>
 	</div>
