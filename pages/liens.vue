@@ -11,6 +11,12 @@ const liensEcole = ref([
 		name: "Plan modulaire",
 		url: "https://www.ict-berufsbildung.ch/services/modulbaukasten",
 		icon: "https://www.ict-berufsbildung.ch/favicon.ico"
+	},
+	{
+		key: "Divtec",
+		name: "Divtec",
+		url: "https://www.divtec.ch/",
+		icon: "https://www.divtec.ch/favicon.ico"
 	}
 ]);
 
