@@ -30,8 +30,7 @@ const disabled = (personne: string, week: number) => {
 			<div v-for="week in 39">{{week}}</div>
 			<template v-for="person in personnes" :key="person">
 				<div>{{person}} - {{fait[person].filter(v=>v).length}}</div>
-				<input type="checkbox" v-for="week in 39" :key="week" :disabled="disabled(person, week)"
-					:checked="fait[person][week]" />
+				<input type="checkbox" v-for="week in 39" :key="week" disabled :checked="fait[person][week]" />
 			</template>
 		</div>
 	</div>
