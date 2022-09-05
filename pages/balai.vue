@@ -1,23 +1,9 @@
 <script setup lang="ts">
 
-let fait = ref((await $fetch("/api/balai")).body.fait)
+let fait = ref((await $fetch("/api/balai") as {body: {fait: Map<string, boolean[]>}}).body.fait)
 
-let personnes = ref<string[]>((await $fetch("/api/balai")).body.noms)
+let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string[]}}).body.noms)
 
-const toggle = (personne: string, week: number) => {
-	let temp = fait.value[personne]
-	temp[week] = !temp[week]
-	fait.value[personne] = temp
-
-	$fetch("/api/balai", {
-		method: "POST",
-		body: JSON.stringify({
-			nom: personne,
-			week: week,
-			fait: fait.value[personne][week]
-		})
-	})
-}
 
 const disabled = (personne: string, week: number) => {
 	if(fait.value[personne][week]) {
@@ -45,7 +31,7 @@ const disabled = (personne: string, week: number) => {
 			<template v-for="person in personnes" :key="person">
 				<div>{{person}} - {{fait[person].filter(v=>v).length}}</div>
 				<input type="checkbox" v-for="week in 39" :key="week" :disabled="disabled(person, week)"
-					:checked="fait[person][week]" @click="() => {toggle(person, week)}" />
+					:checked="fait[person][week]" />
 			</template>
 		</div>
 	</div>
