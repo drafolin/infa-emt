@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-export default defineEventHandler((event) => {
+/*export default defineEventHandler(*/ (event) => {
   let body = "";
   let prisma = new PrismaClient();
   event.req.on("data", (chunk) => {
@@ -63,4 +63,4 @@ export default defineEventHandler((event) => {
     await prisma.$disconnect();
   });
   return;
-});
+}; //);
