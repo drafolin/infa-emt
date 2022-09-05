@@ -5,6 +5,7 @@
 			<NuxtLink to="/">Accueil</NuxtLink>
 			<NuxtLink to="/calculateurs">Calculateurs</NuxtLink>
 			<NuxtLink to="/balai">Balai</NuxtLink>
+			<NuxtLink to="/liens">Liens utiles</NuxtLink>
 		</nav>
 	</div>
 </template>
