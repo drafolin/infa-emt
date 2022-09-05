@@ -1,7 +1,5 @@
 <script setup lang="ts">
-
 let fait = ref((await $fetch("/api/balai") as {body: {fait: Map<string, boolean[]>}}).body.fait)
-
 let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string[]}}).body.noms)
 </script>
 
@@ -22,7 +20,7 @@ let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string
 <style>
 .table {
 	display: grid;
-	grid-template-columns: repeat(40, 1fr);
+	grid-template-columns: 100px repeat(39, 1fr);
 	grid-template-rows: repeat(8, 1fr);
 	text-align: center
 }
