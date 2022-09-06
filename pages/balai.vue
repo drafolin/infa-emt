@@ -1,18 +1,38 @@
 <script setup lang="ts">
-let fait = ref((await $fetch("/api/balai") as {body: {fait: Map<string, boolean[]>}}).body.fait)
-let personnes = ref<string[]>((await $fetch("/api/balai") as {body: {noms:string[]}}).body.noms)
+let fait = ref<Map<string, boolean[]>>();
+let personnes = ref<string[]>();
+let loaded = ref(false);
+let error = ref(false);
+const main = async () => {
+	try {
+		fait.value = (await $fetch("/api/balai") as { body: { fait: Map<string, boolean[]>; }; }).body.fait;
+		personnes.value = (await $fetch("/api/balai") as { body: { noms: string[]; }; }).body.noms;
+	} catch (e) {
+		error.value = true;
+		console.error(e);
+	}
+	loaded.value = true;
+};
+main();
 </script>
 
 <template>
 	<div class="page">
 		<h1>Planning du balai</h1>
-		<div class="table">
+		<div v-if="error">
+			<p>Une erreur est survenue lors du chargement des données.</p>
+			<p>Veuillez contacter dindin|nibnib, en fournissant les logs de la console.</p>
+		</div>
+		<div class="table" v-else-if="loaded">
 			<div>Personne</div>
-			<div v-for="week in 39">{{week}}</div>
+			<div v-for="week in 39">{{ week }}</div>
 			<template v-for="person in personnes" :key="person">
-				<div>{{person}} - {{fait[person].filter(v=>v).length}}</div>
+				<div>{{ person }} - {{ fait[person].filter(v => v).length }}</div>
 				<input type="checkbox" v-for="week in 39" :key="week" :checked="fait[person][week]" />
 			</template>
+		</div>
+		<div v-else>
+			Chargement...
 		</div>
 	</div>
 </template>
