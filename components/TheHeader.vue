@@ -13,7 +13,7 @@
 					<NuxtLink to="/liens">Liens utiles</NuxtLink>
 				</li>
 				<li>
-					<NuxtLink to="/contact"></NuxtLink>
+					<NuxtLink to="/contact">Nous, contact et autres</NuxtLink>
 				</li>
 			</ul>
 		</nav>
