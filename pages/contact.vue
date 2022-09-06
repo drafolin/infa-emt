@@ -87,6 +87,34 @@ eleves.value = [{
 
 <template>
 	<div>
-
+		<ul class="liste-eleves">
+			<li v-for="eleve in eleves">
+				<span>{{ eleve.nom }} {{ eleve.prenom }}</span>
+				<ul>
+					<li>Telephone: <NuxtLink :to="'tel:' + eleve.tel">{{ eleve.tel }}</NuxtLink>
+					</li>
+					<li>eMails:
+						<ul>
+							<li v-for="email in eleve.emails">
+								<NuxtLink :to="'mailto:' + email">{{ email }}</NuxtLink>
+							</li>
+						</ul>
+					</li>
+					<li v-if="eleve.discord">Discord: {{ eleve.discord }}</li>
+					<li v-if="eleve.instagram">Instagram: <NuxtLink :to="`https://www.instagram.com/${eleve.instagram}`">{{
+							eleve.instagram
+					}}</NuxtLink>
+					</li>
+					<li v-if="eleve.snap">Snapchat: {{ eleve.snap }}</li>
+				</ul>
+			</li>
+		</ul>
 	</div>
 </template>
+
+<style scoped>
+.liste-eleves {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+</style>
