@@ -1,5 +1,5 @@
 <script setup lang="ts">
-let fait = ref<Map<string, boolean[]>>();
+let fait = ref(new Map<string, boolean[]>());
 let personnes = ref<string[]>();
 let loaded = ref(false);
 let error = ref(false);
@@ -27,8 +27,8 @@ main();
 			<div>Personne</div>
 			<div v-for="week in 39">{{ week }}</div>
 			<template v-for="person in personnes" :key="person">
-				<div>{{ person }} - {{ fait[person].filter(v => v).length }}</div>
-				<input type="checkbox" v-for="week in 39" :key="week" :checked="fait[person][week]" />
+				<div>{{ person }} - {{ fait.get(person)?.filter((v: boolean) => v).length }}</div>
+				<input type="checkbox" v-for="week in 39" :key="week" :checked="fait.get(person)?.at(week)" />
 			</template>
 		</div>
 		<div v-else>
