@@ -1,35 +1,31 @@
 <script setup lang="ts">
+import Datepicker from "@vuepic/vue-datepicker";
+import '@vuepic/vue-datepicker/dist/main.css';
+
 let noteText = ref(""), coeffText = ref(""); /* Créé les variables noteText et coeffText, 
 																						    utilisées pour récupérer les valeurs des champs de saisie */
 
 let notes = ref<{ note: number; coefficient: number; }[]>([]); // Créé un tableau de notes réactives
 let moyenne = ref(0); // Créé une moyenne réactive
 
-let heureArrivee = ref(0); // Créé une heure d'arrivée réactive
-let minuteArrivee = ref(0); // Créé une minute d'arrivée réactive
+let heureArrivee = ref({ hours: 0, minutes: 0 }); // Créé une heure d'arrivée réactive
 
-let heureDebutPause = ref(0); // Créé une heure de début de pause réactive
-let minuteDebutPause = ref(0); // Créé une minute de début de pause réactive
+let heureDebutPause = ref({ hours: 0, minutes: 0 }); // Créé une heure de début de pause réactive
 
-let heureFinPause = ref(0); // Créé une heure de fin de pause réactive
-let minuteFinPause = ref(0); // Créé une minute de fin de pause réactive
+let heureFinPause = ref({ hours: 0, minutes: 0 }); // Créé une heure de fin de pause réactive
 
-let heureDepart = ref(0); // Créé une heure de départ réactive
-let minuteDepart = ref(0); // Créé une minute de départ réactive
+let heureDepart = ref({ hours: 0, minutes: 0 }); // Créé une heure de départ réactive
 
-let heuresBase = ref(0); // Créé les heures de base réactives
-let minutesBase = ref(0); // Créé les minutes de base réactives
+let heuresBase = ref({ hours: 0, minutes: 0 }); // Créé les heures de base réactives
 
-let total = ref(0); // Créé un total réactif
+let total = computed(() => {
+	let minutesDepart = heureDepart.value.hours * 60 + heureDepart.value.minutes;
+	let minutesArrivee = heureArrivee.value.hours * 60 + heureArrivee.value.minutes;
+	let minutesDebutPause = heureDebutPause.value.hours * 60 + heureDebutPause.value.minutes;
+	let minutesFinPause = heureFinPause.value.hours * 60 + heureFinPause.value.minutes;
 
-const calculerTemps = () => { // Créé une fonction calculerTemps
-	let debutPause = heureDebutPause.value * 60 + minuteDebutPause.value; // Créé une variable debutPause
-	let finPause = heureFinPause.value * 60 + minuteFinPause.value; // Créé une variable finPause
-	let arrivee = heureArrivee.value * 60 + minuteArrivee.value; // Créé une variable arrivee
-	let depart = heureDepart.value * 60 + minuteDepart.value; // Créé une variable depart
-
-	total.value = depart - arrivee - (finPause - debutPause); // Créé une variable total
-};
+	return minutesDepart - minutesArrivee - (minutesFinPause - minutesDebutPause);
+}); // Créé une variable total
 
 onMounted(() => {
 	notes.value = JSON.parse(localStorage.getItem("notes") || "[]"); // Récupère les notes sauvegardées dans le localStorage
@@ -83,32 +79,42 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 		<h2>Heures</h2>
 		<div>
 			<h3>Heures actuelles</h3>
-			<input type="number" v-model="heuresBase">h <input type="number" v-model="minutesBase">min
-			<h3>Arivée</h3>
-			<input type="number" v-model="heureArrivee" />:<input type="number" v-model="minuteArrivee" />
+			<Datepicker timePicker v-model="heuresBase" />
+			<div class="horizontal">
+				<div>
+					<h3>Arivée</h3>
+					<Datepicker timePicker v-model="heureArrivee" />
+				</div>
 
-			<h3>Pause</h3>
-			<div>
-				<h4>Début</h4>
-				<input type="number" v-model="heureDebutPause" />:<input type="number" v-model="minuteDebutPause" />
+				<div>
+					<h3>Pause</h3>
+					<div class="horizontal">
+						<div>
+							<h4>Début</h4>
+							<Datepicker timePicker v-model="heureDebutPause" />
+						</div>
+						<div>
+							<h4>Fin</h4>
+							<Datepicker timePicker v-model="heureFinPause" />
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<h3>Départ</h3>
+					<Datepicker timePicker v-model="heureDepart" />
+				</div>
 			</div>
 
-			<div>
-				<h4>Fin</h4>
-				<input type="number" v-model="heureFinPause" />:<input type="number" v-model="minuteFinPause" />
-			</div>
-
-			<h3>Départ</h3>
-			<input type="number" v-model="heureDepart" />:<input type="number" v-model="minuteDepart" />
-
+			<hr>
 			<h3>Resultat</h3>
-			<button @click="calculerTemps">Calculer</button>
 			<h4>Travail aujourd'hui</h4>
 			<p>{{ Math.floor(total / 60) }}h {{ total % 60 }}min</p>
 			<h4>Gagné</h4>
 			<p>{{ Math.floor((total - 450) / 60) }}h {{ (total - 450) % 60 }}min</p>
 			<h4>Total</h4>
-			<p>{{ Math.floor((total - 450 + minutesBase) / 60) + heuresBase }}h {{ (total - 450 + minutesBase) % 60 }}min</p>
+			<p>{{ Math.floor((total-450) / 60) }}h {{ (total - 450) % 60 }}min
+			</p>
 		</div>
 		<hr />
 
@@ -124,10 +130,35 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					{{ note.note }} - {{ note.coefficient }}%
 				</li>
 			</ul>
-			<span>Moyenne: {{ moyenne }}</span>
+			<span>{{moyenne }}</span>
 		</div>
 	</div>
 </template>
 
 <style>
+.horizontal {
+	display: flex;
+	flex-direction: row;
+	column-gap: 10px;
+	align-items: center;
+}
+
+h1+h2+div div:not(.horizontal) {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1+h2+div {
+	max-width: calc(100%/3);
+}
+
+h3 {
+	text-align: center;
+}
+
+h1+h2+div>.horizontal>div {
+	border: solid 1px #8080803d;
+	height: 160px;
+}
 </style>
