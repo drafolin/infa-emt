@@ -79,11 +79,11 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 		<h2>Heures</h2>
 		<div>
 			<h3>Heures actuelles</h3>
-			<Datepicker timePicker v-model="heuresBase" />
+			<Datepicker timePicker v-model="heuresBase" textInput />
 			<div class="horizontal">
 				<div>
 					<h3>Arivée</h3>
-					<Datepicker timePicker v-model="heureArrivee" />
+					<Datepicker timePicker v-model="heureArrivee" textInput />
 				</div>
 
 				<div>
@@ -91,18 +91,18 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					<div class="horizontal">
 						<div>
 							<h4>Début</h4>
-							<Datepicker timePicker v-model="heureDebutPause" />
+							<Datepicker timePicker v-model="heureDebutPause" textInput />
 						</div>
 						<div>
 							<h4>Fin</h4>
-							<Datepicker timePicker v-model="heureFinPause" />
+							<Datepicker timePicker v-model="heureFinPause" textInput />
 						</div>
 					</div>
 				</div>
 
 				<div>
 					<h3>Départ</h3>
-					<Datepicker timePicker v-model="heureDepart" />
+					<Datepicker timePicker v-model="heureDepart" textInput />
 				</div>
 			</div>
 
