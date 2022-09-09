@@ -110,6 +110,20 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 			<h3>Resultat</h3>
 			<h4>Travail aujourd'hui</h4>
 			<p>{{ Math.floor(total / 60) }}h {{ total % 60 }}min</p>
+			<div class="horizontal">
+				<div>
+					<h5>Matin</h5>
+					<p>{{ Math.floor((heureDebutPause.hours * 60 + heureDebutPause.minutes - heureArrivee.hours *
+					60 - heureArrivee.minutes) / 60) }}h {{ (heureDebutPause.hours * 60 +
+						heureDebutPause.minutes - heureArrivee.hours * 60 - heureArrivee.minutes) % 60 }}min</p>
+				</div>
+				<div>
+					<h5>Après-midi</h5>
+					<p>{{ Math.floor((heureDepart.hours * 60 + heureDepart.minutes - heureFinPause.hours * 60 -
+					heureFinPause.minutes) / 60) }}h {{ (heureDepart.hours * 60 + heureDepart.minutes -
+						heureFinPause.hours * 60 - heureFinPause.minutes) % 60 }}min</p>
+				</div>
+			</div>
 			<h4>Gagné</h4>
 			<p>{{ Math.floor((total - 450) / 60) }}h {{ (total - 450) % 60 }}min</p>
 			<h4>Total</h4>
