@@ -5,8 +5,11 @@ let loaded = ref(false);
 let error = ref(false);
 const main = async () => {
 	try {
-		fait.value = (await $fetch("/api/balai") as { body: { fait: Map<string, boolean[]>; }; }).body.fait;
-		personnes.value = (await $fetch("/api/balai") as { body: { noms: string[]; }; }).body.noms;
+		let done = (await $fetch("/api/balai")).body.fait;
+		for (let [key, value] of Object.entries(done)) {
+			fait.value.set(key, value);
+		}
+		personnes.value = (await $fetch("/api/balai")).body.noms;
 	} catch (e) {
 		error.value = true;
 		console.error(e);
