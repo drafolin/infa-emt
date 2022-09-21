@@ -4,6 +4,7 @@ const props = defineProps<{
 	speed: number;
 	reverseSpeed: number;
 	pause: number;
+	cursor: boolean;
 }>();
 
 const index = ref(0);
@@ -55,5 +56,29 @@ type();
 </script>
 
 <template>
-	{{ displayedText }}
+	<div>
+		{{ displayedText }}
+		<span v-if="cursor" class="cursor">|</span>
+	</div>
 </template>
+
+<style lang="css" scoped>
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+.cursor {
+	animation: blink 1s infinite;
+	font-weight: 900;
+}
+</style>
