@@ -1,3 +1,48 @@
+body {
+	margin: 0;
+}
+
+h1,
+h2 {
+	font-family: "Roboto Mono", monospace;
+	margin: 0;
+}
+
 h1 {
-	color: red;
+	font-size: 72px;
+	margin-bottom: 2.75%;
+	font-weight: 700;
+	line-height: 72px;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 54px 0;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	max-width: 1080px;
+	margin: auto;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+}
+
+.hero-fullscreen p {
+	padding-bottom: 0;
+	margin: 0;
+	font-family: "Roboto Mono", monospace;
+	font-size: 17px;
+	padding-left: 10px;
 }
