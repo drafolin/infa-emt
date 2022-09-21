@@ -3,10 +3,12 @@
 
 <template>
 	<div>
-		<h1>INF2A</h1>
+		<div class="section">
+			<div class="row">
+				<div class="column">
 
-		<p>
-			Bienvenue sur le site officiel de la classe INF2A de la divtec!
-		</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
