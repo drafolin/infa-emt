@@ -1,12 +1,29 @@
+@font-face {
+	font-family: 'Overpass';
+	src: url("../fonts/overpass/overpass-regular-webfont.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Roboto mono";
+	src: url("../fonts/roboto-mono/RobotoMono-Regular.ttf") format("truetype");
+}
+
 body {
 	margin: 0;
+	font-weight: 500;
 }
 
 h1,
-h2,
 p {
 	font-family: "Roboto Mono", monospace;
 	margin: 0;
+}
+
+p {
+	padding-bottom: 1em;
+	text-align: justify;
+	font-size: 14px;
+	line-height: 23.8px;
 }
 
 h1 {
@@ -14,6 +31,14 @@ h1 {
 	margin-bottom: 2.75%;
 	font-weight: 700;
 	line-height: 72px;
+}
+
+h2 {
+	font-family: 'Overpass', Helvetica, Arial, Lucida, sans-serif;
+	font-weight: 600;
+	font-variant: small-caps;
+	color: #9f9c93;
+	margin-bottom: 60px;
 }
 
 .section {
@@ -31,13 +56,29 @@ h1 {
 	width: 80%;
 	max-width: 1080px;
 	margin: auto;
+	padding: 27px 0;
+}
+
+.row:not(.row-1) {
+	justify-content: space-between;
 }
 
 .column {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.row-1 .column {
 	width: 100%;
+}
+
+.row-3_5 .column:first-child {
+	width: 57.8%;
+}
+
+.row-3_5 .column:last-child {
+	width: 36.7%;
 }
 
 .hero-fullscreen p {
