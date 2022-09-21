@@ -3,7 +3,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+p {
 	font-family: "Roboto Mono", monospace;
 	margin: 0;
 }
