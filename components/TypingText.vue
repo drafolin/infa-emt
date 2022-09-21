@@ -57,8 +57,7 @@ type();
 
 <template>
 	<div>
-		{{ displayedText }}
-		<span v-if="cursor" class="cursor">|</span>
+		{{ displayedText }}<span v-if="cursor" class="cursor">|</span>
 	</div>
 </template>
 
