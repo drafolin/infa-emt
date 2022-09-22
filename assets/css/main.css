@@ -41,6 +41,13 @@ h2 {
 	margin-bottom: 60px;
 }
 
+h4 {
+	font-family: 'Overpass', Helvetica, Arial, Lucida, sans-serif;
+	color: #C2320A;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
 .section {
 	display: flex;
 	flex-direction: column;
@@ -63,6 +70,10 @@ h2 {
 	justify-content: space-between;
 }
 
+.row:not(.row-1) .column:not(:last-child) {
+	margin-right: 5.5%
+}
+
 .column {
 	display: flex;
 	flex-direction: column;
@@ -71,6 +82,10 @@ h2 {
 
 .row-1 .column {
 	width: 100%;
+}
+
+.row-1_2 .column {
+	width: 47.5%;
 }
 
 .row-3_5 .column:first-child {
@@ -87,4 +102,19 @@ h2 {
 	font-family: "Roboto Mono", monospace;
 	font-size: 17px;
 	padding-left: 10px;
+}
+
+.blurb {
+	background-color: #F5F5F5;
+	border-radius: 7px 7px 7px 7px;
+	overflow: hidden;
+	padding-top: 30px !important;
+	padding-right: 30px !important;
+	padding-bottom: 30px !important;
+	padding-left: 30px !important;
+}
+
+.blurb img {
+	height: auto;
+	max-width: 100%;
 }

@@ -35,6 +35,41 @@
 				</div>
 			</div>
 		</div>
+		<div class="section">
+			<div class="row row-1">
+				<div class="column">
+					<h2>Situation</h2>
+				</div>
+			</div>
+			<div class="row row-1_2">
+				<div class="column">
+					<div class="blurb">
+						<img src="@/assets/porrentruy.jpg" alt="La ville de Porrentruy">
+						<h4>PORRENTRUY</h4>
+						<p>
+							<strong>Porrentruy</strong> est une commune suisse située dans le canton du Jura dans la région de
+							l’Ajoie. Elle est le chef-lieu du district de Porrentruy. Elle est la troisième commune du canton du Jura
+							par sa population.
+						</p>
+					</div>
+				</div>
+				<div class="column">
+					<div class="blurb">
+						<img src="@/assets/juraPaysage.jpg" alt="Le canton du Jura">
+						<h4>JURA</h4>
+						<p>
+							<strong>Le canton du Jura</strong> (JU), officiellement la <strong>république et canton du Jura</strong>,
+							est l’un des 26 cantons de la Suisse.
+							Il est composé de trois districts et son chef-lieu est Delémont. Il est le plus jeune canton de suisse.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row row-1">
+				<div class="column">
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -65,7 +100,6 @@
 	.row:nth-child(2) {
 		.column:first-child {
 			padding-right: 36px;
-			margin-right: 5.5%
 		}
 
 		.column:last-child img {
@@ -83,5 +117,9 @@
 	.row:last-child {
 		padding-bottom: 119px;
 	}
+}
+
+.section:nth-child(3) {
+	background-color: #9F9C93;
 }
 </style>
