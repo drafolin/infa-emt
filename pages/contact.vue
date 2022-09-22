@@ -16,7 +16,7 @@ eleves.value = [{
 	prenom: "Odin",
 	tel: "079 844 29 28",
 	emails: ["odin.beuchat@divtec.ch", "mail@dindin.ch"],
-	discord: "dindin|nibnib#0202",
+	discord: "dindin|nibnib#0621",
 	dateNaissance: new Date("2006-10-05")
 },
 {
