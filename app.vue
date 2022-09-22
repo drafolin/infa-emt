@@ -6,6 +6,12 @@ useHead({
 			name: 'description',
 			content: 'Site de la classe INF2A'
 		}
+	],
+	link: [
+		{
+			rel: 'favicon',
+			content: '/favicon.ico'
+		}
 	]
 });
 </script>
