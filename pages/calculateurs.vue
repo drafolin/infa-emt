@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Datepicker from "@vuepic/vue-datepicker";
 import '@vuepic/vue-datepicker/dist/main.css';
+import { toTypeDeclarationFile } from "unimport";
 
 let noteText = ref(""), coeffText = ref(""); /* Créé les variables noteText et coeffText, 
 																						    utilisées pour récupérer les valeurs des champs de saisie */
@@ -16,16 +17,11 @@ let heureFinPause = ref({ hours: 0, minutes: 0 }); // Créé une heure de fin de
 
 let heureDepart = ref({ hours: 0, minutes: 0 }); // Créé une heure de départ réactive
 
-let heuresBase = ref({ hours: 0, minutes: 0 }); // Créé les heures de base réactives
+let totalMatin = computed(() => heureDebutPause.value.hours * 60 + heureDebutPause.value.minutes - heureArrivee.value.hours * 60 - heureArrivee.value.minutes); // Créé un total de temps passé le matin réactif
 
-let total = computed(() => {
-	let minutesDepart = heureDepart.value.hours * 60 + heureDepart.value.minutes;
-	let minutesArrivee = heureArrivee.value.hours * 60 + heureArrivee.value.minutes;
-	let minutesDebutPause = heureDebutPause.value.hours * 60 + heureDebutPause.value.minutes;
-	let minutesFinPause = heureFinPause.value.hours * 60 + heureFinPause.value.minutes;
+let totalApresMidi = computed(() => heureDepart.value.hours * 60 + heureDepart.value.minutes - heureFinPause.value.hours * 60 - heureFinPause.value.minutes); // Créé un total de temps passé l'après-midi réactif
 
-	return minutesDepart - minutesArrivee - (minutesFinPause - minutesDebutPause);
-}); // Créé une variable total
+let total = computed(() => totalMatin.value + totalApresMidi.value); // Créé une variable total
 
 onMounted(() => {
 	notes.value = JSON.parse(localStorage.getItem("notes") || "[]"); // Récupère les notes sauvegardées dans le localStorage
@@ -78,12 +74,12 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 		<h1>Calculateurs</h1>
 		<h2>Heures</h2>
 		<div>
-			<h3>Heures actuelles</h3>
-			<Datepicker timePicker v-model="heuresBase" textInput />
+			<!--h3>Heures actuelles</h3>
+			<Datepicker timePicker v-model="heuresBase" textInput autoApply :clearable="false" /-->
 			<div class="horizontal">
 				<div>
 					<h3>Arivée</h3>
-					<Datepicker timePicker v-model="heureArrivee" textInput />
+					<Datepicker timePicker v-model="heureArrivee" textInput autoApply :clearable="false" />
 				</div>
 
 				<div>
@@ -91,45 +87,45 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					<div class="horizontal">
 						<div>
 							<h4>Début</h4>
-							<Datepicker timePicker v-model="heureDebutPause" textInput />
+							<Datepicker timePicker v-model="heureDebutPause" textInput autoApply :clearable="false" />
 						</div>
 						<div>
 							<h4>Fin</h4>
-							<Datepicker timePicker v-model="heureFinPause" textInput />
+							<Datepicker timePicker v-model="heureFinPause" textInput autoApply :clearable="false" />
 						</div>
 					</div>
 				</div>
 
 				<div>
 					<h3>Départ</h3>
-					<Datepicker timePicker v-model="heureDepart" textInput />
+					<Datepicker timePicker v-model="heureDepart" textInput autoApply :clearable="false" />
 				</div>
 			</div>
 
 			<hr>
 			<h3>Resultat</h3>
 			<h4>Travail aujourd'hui</h4>
-			<p>{{ Math.floor(total / 60) }}h {{ total % 60 }}min</p>
+			<p>{{ total / 60 >= 0 ? Math.floor(total / 60) : Math.ceil(total / 60) }}h {{ total % 60 }}min</p>
 			<div class="horizontal">
 				<div>
 					<h5>Matin</h5>
-					<p>{{ Math.floor((heureDebutPause.hours * 60 + heureDebutPause.minutes - heureArrivee.hours *
-					60 - heureArrivee.minutes) / 60) }}h {{ (heureDebutPause.hours * 60 +
-						heureDebutPause.minutes - heureArrivee.hours * 60 - heureArrivee.minutes) % 60 }}min</p>
+					<p>{{ totalMatin / 60 >= 0 ? Math.floor(totalMatin / 60) : Math.ceil(totalMatin / 60) }}h {{ totalMatin % 60
+					}}min</p>
 				</div>
 				<div>
 					<h5>Après-midi</h5>
-					<p>{{ Math.floor((heureDepart.hours * 60 + heureDepart.minutes - heureFinPause.hours * 60 -
-					heureFinPause.minutes) / 60) }}h {{ (heureDepart.hours * 60 + heureDepart.minutes -
-						heureFinPause.hours * 60 - heureFinPause.minutes) % 60 }}min</p>
+					<p>{{ totalApresMidi / 60 >= 0 ? Math.floor(totalApresMidi / 60) : Math.ceil(totalApresMidi / 60) }}h {{
+							totalApresMidi % 60
+					}}min</p>
 				</div>
 			</div>
 			<h4>Gagné</h4>
 			<p>{{ Math.floor((total - 450) / 60) }}h {{ (total - 450) % 60 }}min</p>
-			<h4>Total</h4>
-			<p>{{ Math.floor((total-450 + heuresBase.hours * 60 + heuresBase.minutes) / 60) }}h {{ (total - 450+
-			heuresBase.hours * 60 + heuresBase.minutes) % 60 }}min
-			</p>
+			<!--h4>Total</h4>
+			<p>{{ Math.floor((total - 450 + heuresBase.hours * 60 + heuresBase.minutes) / 60) }}h {{ (total - 450 +
+					heuresBase.hours * 60 + heuresBase.minutes) % 60
+			}}min
+		</p-->
 		</div>
 		<hr />
 
@@ -145,7 +141,7 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					{{ note.note }} - {{ note.coefficient }}%
 				</li>
 			</ul>
-			<span>{{moyenne }}</span>
+			<span>{{ moyenne }}</span>
 		</div>
 	</div>
 </template>
