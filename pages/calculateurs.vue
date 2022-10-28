@@ -3,7 +3,7 @@ import Datepicker from "@vuepic/vue-datepicker";
 import '@vuepic/vue-datepicker/dist/main.css';
 import { toTypeDeclarationFile } from "unimport";
 
-const TEMPS_TRAVAIL_MINIMUM = { hours: 7, minutes: 20 };
+const TEMPS_TRAVAIL_MINIMUM = { hours: 7, minutes: 25 };
 const MINUTES_TRAVAIL_MINIMUM = TEMPS_TRAVAIL_MINIMUM.hours * 60 + TEMPS_TRAVAIL_MINIMUM.minutes;
 
 let noteText = ref(""), coeffText = ref(""); /* Créé les variables noteText et coeffText, 
