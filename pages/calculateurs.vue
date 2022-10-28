@@ -3,6 +3,9 @@ import Datepicker from "@vuepic/vue-datepicker";
 import '@vuepic/vue-datepicker/dist/main.css';
 import { toTypeDeclarationFile } from "unimport";
 
+const TEMPS_TRAVAIL_MINIMUM = { hours: 7, minutes: 20 };
+const MINUTES_TRAVAIL_MINIMUM = TEMPS_TRAVAIL_MINIMUM.hours * 60 + TEMPS_TRAVAIL_MINIMUM.minutes;
+
 let noteText = ref(""), coeffText = ref(""); /* Créé les variables noteText et coeffText, 
 																						    utilisées pour récupérer les valeurs des champs de saisie */
 
@@ -120,12 +123,10 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 				</div>
 			</div>
 			<h4>Gagné</h4>
-			<p>{{ Math.floor((total - 450) / 60) }}h {{ (total - 450) % 60 }}min</p>
-			<!--h4>Total</h4>
-			<p>{{ Math.floor((total - 450 + heuresBase.hours * 60 + heuresBase.minutes) / 60) }}h {{ (total - 450 +
-					heuresBase.hours * 60 + heuresBase.minutes) % 60
-			}}min
-		</p-->
+			<p>{{ (total - MINUTES_TRAVAIL_MINIMUM) / 60 >= 0
+					? Math.floor((total - MINUTES_TRAVAIL_MINIMUM) / 60)
+					: Math.ceil((total - MINUTES_TRAVAIL_MINIMUM) / 60)
+			}}h {{ (total - MINUTES_TRAVAIL_MINIMUM) % 60 }}min</p>
 		</div>
 		<hr />
 
