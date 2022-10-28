@@ -20,11 +20,15 @@ let heureFinPause = ref({ hours: 0, minutes: 0 }); // Créé une heure de fin de
 
 let heureDepart = ref({ hours: 0, minutes: 0 }); // Créé une heure de départ réactive
 
+let pauseApresMidi = ref(false); // Créé une pause après-midi réactive
+
 let totalMatin = computed(() => heureDebutPause.value.hours * 60 + heureDebutPause.value.minutes - heureArrivee.value.hours * 60 - heureArrivee.value.minutes); // Créé un total de temps passé le matin réactif
 
-let totalApresMidi = computed(() => heureDepart.value.hours * 60 + heureDepart.value.minutes - heureFinPause.value.hours * 60 - heureFinPause.value.minutes); // Créé un total de temps passé l'après-midi réactif
+let totalApresMidi = computed(() => (heureDepart.value.hours * 60 + heureDepart.value.minutes - heureFinPause.value.hours * 60 - heureFinPause.value.minutes) - (pauseApresMidi.value ? 10 : 0)); // Créé un total de temps passé l'après-midi réactif
 
 let total = computed(() => totalMatin.value + totalApresMidi.value); // Créé une variable total
+
+let texteTempsRelatif = computed(() => total.value - MINUTES_TRAVAIL_MINIMUM < 0 ? "Perdu" : "Gagné"); // Créé une variable texteTempsRelatif
 
 onMounted(() => {
 	notes.value = JSON.parse(localStorage.getItem("notes") || "[]"); // Récupère les notes sauvegardées dans le localStorage
@@ -104,7 +108,12 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					<Datepicker timePicker v-model="heureDepart" textInput autoApply :clearable="false" />
 				</div>
 			</div>
-
+			<div>
+				<label>
+					<input type="checkbox" v-model="pauseApresMidi">
+					Pause de l'après-midi
+				</label>
+			</div>
 			<hr>
 			<h3>Resultat</h3>
 			<h4>Travail aujourd'hui</h4>
@@ -122,11 +131,11 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					}}min</p>
 				</div>
 			</div>
-			<h4>Gagné</h4>
-			<p>{{ (total - MINUTES_TRAVAIL_MINIMUM) / 60 >= 0
+			<h4>{{ texteTempsRelatif }}</h4>
+			<p>{{ Math.abs((total - MINUTES_TRAVAIL_MINIMUM) / 60 >= 0
 					? Math.floor((total - MINUTES_TRAVAIL_MINIMUM) / 60)
-					: Math.ceil((total - MINUTES_TRAVAIL_MINIMUM) / 60)
-			}}h {{ (total - MINUTES_TRAVAIL_MINIMUM) % 60 }}min</p>
+					: Math.ceil((total - MINUTES_TRAVAIL_MINIMUM) / 60))
+			}}h {{ Math.abs((total - MINUTES_TRAVAIL_MINIMUM) % 60) }}min</p>
 		</div>
 		<hr />
 
@@ -162,7 +171,7 @@ h1+h2+div div:not(.horizontal) {
 }
 
 h1+h2+div {
-	max-width: calc(100%/3);
+	max-width: max(calc(100%/3), 500px);
 }
 
 h3 {
