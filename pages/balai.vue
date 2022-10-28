@@ -45,10 +45,15 @@ main();
 	display: grid;
 	grid-template-columns: 100px repeat(39, 1fr);
 	grid-template-rows: repeat(8, 1fr);
-	text-align: center
+	text-align: center;
+	align-items: center;
 }
 
 .table>* {
+	height: fit-content;
+}
+
+.table>input {
 	height: 40px;
 }
 
