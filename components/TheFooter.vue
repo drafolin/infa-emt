@@ -41,7 +41,7 @@
 	background-color: #f5f5f5;
 	color: #333;
 	font-size: 0.8em;
-	padding: 0 20px;
+	padding: 0;
 	margin: 0;
 
 	.resources {
