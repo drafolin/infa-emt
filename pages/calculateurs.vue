@@ -10,7 +10,6 @@ let noteText = ref(""), coeffText = ref(""); /* Créé les variables noteText et
 																						    utilisées pour récupérer les valeurs des champs de saisie */
 
 let notes = ref<{ note: number; coefficient: number; }[]>([]); // Créé un tableau de notes réactives
-let moyenne = ref(0); // Créé une moyenne réactive
 
 let heureArrivee = ref({ hours: 0, minutes: 0 }); // Créé une heure d'arrivée réactive
 
@@ -34,7 +33,7 @@ onMounted(() => {
 	notes.value = JSON.parse(localStorage.getItem("notes") || "[]"); // Récupère les notes sauvegardées dans le localStorage
 });
 
-const calcMoyenne = (): number => {
+const moyenne = computed((): number => {
 	let sommeNotes = 0, sommeCoeff = 0;
 	for (let i = 0; i < notes.value.length; i++) {
 		sommeNotes += notes.value[i].note * notes.value[i].coefficient;
@@ -43,7 +42,7 @@ const calcMoyenne = (): number => {
 
 	if (sommeCoeff == 0) return 0;
 	return sommeNotes / sommeCoeff;
-};
+});
 
 const addNote = () => { // Créé une fonction addNote
 	let note = parseFloat(noteText.value); // Récupère la valeur de noteText
@@ -62,15 +61,11 @@ const addNote = () => { // Créé une fonction addNote
 	noteText.value = ""; // Réinitialise noteText
 	coeffText.value = ""; // Réinitialise coeffText
 
-	moyenne.value = calcMoyenne(); // Calcule la moyenne
-
 	localStorage.setItem("notes", JSON.stringify(notes.value)); // Sauvegarde les notes dans le localStorage
 };
 
 const removeNote = (index: number) => { // Créé une fonction removeNote
 	notes.value.splice(index, 1); // Supprime la note à l'index donné
-
-	moyenne.value = calcMoyenne(); // Calcule la moyenne
 
 	localStorage.setItem("notes", JSON.stringify(notes.value)); // Sauvegarde les notes dans le localStorage
 };
@@ -125,7 +120,6 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 						</div>
 					</div>
 				</div>
-				<hr>
 				<div class="column resultat">
 					<h3>Resultat</h3>
 					<h4>Travail aujourd'hui</h4>
@@ -149,21 +143,35 @@ const removeNote = (index: number) => { // Créé une fonction removeNote
 					}}h {{ Math.abs((total - MINUTES_TRAVAIL_MINIMUM) % 60) }}min</p>
 				</div>
 			</div>
-			<hr />
-
-			<h2>Moyennes</h2>
-			<div>
-				<input type="text" placeholder="Note" v-model="noteText"> -
-				<input type="text" placeholder="Coefficient" v-model="coeffText">%
-				<button @click="addNote">Ajouter</button>
-				<ul>
-					<li v-for="note, index in notes">
-						<button @click="() => { removeNote(index); }">X</button>
-						<!--/* Utilisation d'une fonction anonyme pour passer un paramètre*/-->
-						{{ note.note }} - {{ note.coefficient }}%
-					</li>
-				</ul>
-				<span>{{ moyenne }}</span>
+		</div>
+		<hr>
+		<div class="section">
+			<div class="row row-1">
+				<div class="column">
+					<h2>Moyenne</h2>
+				</div>
+			</div>
+			<div class="row row-1_2 align-top">
+				<div class="column">
+					<div>
+						<form @submit.prevent="addNote">
+							<input type="text" placeholder="Note" v-model="noteText"> -
+							<input type="text" placeholder="Coefficient" v-model="coeffText">%
+							<button>Ajouter</button>
+						</form>
+						<ul>
+							<li v-for="note, index in notes">
+								<button class="delete" @click="() => { removeNote(index); }">X</button>
+								<!--/* Utilisation d'une fonction anonyme pour passer un paramètre*/-->
+								<span>{{ note.note }} - {{ note.coefficient }}%</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="column">
+					<h3>Resultat</h3>
+					<p>{{ moyenne }}</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -221,5 +229,19 @@ h1+h2+div {
 	p {
 		font-size: 16px;
 	}
+}
+
+.delete {
+	background-color: #000000;
+	color: #ffffff;
+	border: none;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	margin: 10px;
+}
+
+button:hover {
+	cursor: pointer;
 }
 </style>

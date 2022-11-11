@@ -68,11 +68,19 @@ h2 {
 	margin-bottom: 60px;
 }
 
+h3 {
+	margin-top: 0;
+}
+
 h4 {
 	font-family: 'Overpass', Helvetica, Arial, Lucida, sans-serif;
 	color: #C2320A;
 	font-weight: 600;
 	margin-bottom: 10px;
+}
+
+hr {
+	margin: 10px 70px;
 }
 
 .section {
@@ -83,7 +91,7 @@ h4 {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	padding: 54px 0;
+	padding: 54px 0 0;
 }
 
 .row {
@@ -95,6 +103,10 @@ h4 {
 	max-width: 1080px;
 	margin: auto;
 	padding: 27px 0;
+
+	&.align-top {
+		align-items: flex-start;
+	}
 }
 
 .row:not(.row-1) {
@@ -158,5 +170,9 @@ h4 {
 		height: auto;
 		max-width: 100%;
 	}
+}
+
+.b-border-black {
+	border-bottom: 1px solid black;
 }
 </style>
