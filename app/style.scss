@@ -1,8 +1,70 @@
-body {
-  footer {
-    img {
-      height: 1em;
-      width: auto;
+:root {
+  @font-face {
+    font-family: "Overpass";
+    src: url("../fonts/overpass/overpass-regular-webfont.otf")
+      format("opentype");
+  }
+
+  @font-face {
+    font-family: "Roboto mono";
+    src: url("../fonts/roboto-mono/RobotoMono-Regular.ttf") format("truetype");
+  }
+
+  body {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h1,
+  p {
+    font-family: "Roboto Mono", monospace;
+    margin: 0;
+  }
+
+  p {
+    padding-bottom: 1em;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 23.8px;
+  }
+
+  h1 {
+    font-size: 72px;
+    margin-bottom: 2.75%;
+    font-weight: 700;
+    line-height: 72px;
+  }
+
+  h2 {
+    font-family: "Overpass", Helvetica, Arial, Lucida, sans-serif;
+    font-weight: 600;
+    font-variant: small-caps;
+    color: #9f9c93;
+    margin-bottom: 60px;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  h4 {
+    font-family: "Overpass", Helvetica, Arial, Lucida, sans-serif;
+    color: #c2320a;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  hr {
+    margin: 10px 70px;
+  }
+  box-sizing: border-box;
+
+  body {
+    footer {
+      img {
+        height: 1em;
+        width: auto;
+      }
     }
   }
 }
