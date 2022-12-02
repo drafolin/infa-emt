@@ -1,13 +1,16 @@
 :root {
+  $monospace: "Roboto Mono", monospace;
+
   @font-face {
     font-family: "Overpass";
-    src: url("../fonts/overpass/overpass-regular-webfont.otf")
+    src: url("/assets/fonts/overpass/overpass-regular-webfont.otf")
       format("opentype");
   }
 
   @font-face {
     font-family: "Roboto mono";
-    src: url("../fonts/roboto-mono/RobotoMono-Regular.ttf") format("truetype");
+    src: url("/assets/fonts/roboto-mono/RobotoMono-Regular.ttf")
+      format("truetype");
   }
 
   h1,
@@ -57,6 +60,48 @@
   body {
     margin: 0;
     font-weight: 500;
+
+    header {
+      nav {
+        height: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+        max-width: 1080px;
+        margin: auto;
+
+        > a {
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 40px;
+          }
+        }
+
+        ul {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            margin: 0 10px;
+
+            a {
+              color: black;
+              text-decoration: none;
+              font-family: $monospace;
+              font-size: 14px;
+              letter-spacing: -0.5px;
+            }
+          }
+        }
+      }
+    }
 
     footer {
       img {

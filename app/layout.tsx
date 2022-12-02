@@ -1,9 +1,10 @@
 import Link from "next/link";
-import nextIcon from "../assets/icons/NEXTJS/logotype/light-background/nextjs-logotype-light-background.svg";
+import nextIcon from "/assets/icons/NEXTJS/logotype/light-background/nextjs-logotype-light-background.svg";
 import Image from "next/image";
 import reactIcon from "/assets/icons/react.svg";
 import heart from "/assets/icons/heart.png";
-import darkVercelIcon from "../assets/icons/Vercel/logotype/dark/vercel-logotype-dark.svg";
+import darkVercelIcon from "/assets/icons/Vercel/logotype/dark/vercel-logotype-dark.svg";
+import infAIcon from "/assets/icons/infa.svg";
 import "./style.scss";
 
 export default function RootLayout({
@@ -15,6 +16,28 @@ export default function RootLayout({
 		<html>
 			<head />
 			<body>
+				<header>
+					<nav>
+						<Link href="/"><Image src={infAIcon} alt="Logo de la classe" /></Link>
+						<ul>
+							<li>
+								<Link href="/">Accueil</Link>
+							</li>
+							<li>
+								<Link href="/calculateurs">Calculateurs</Link>
+							</li>
+							<li>
+								<Link href="/balai">Balai</Link>
+							</li>
+							<li>
+								<Link href="/liens">Liens utiles</Link>
+							</li>
+							<li>
+								<Link href="/contact">Nous, contact et autres</Link>
+							</li>
+						</ul>
+					</nav>
+				</header>
 				<main>
 					{children}
 				</main>
