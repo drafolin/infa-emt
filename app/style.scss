@@ -10,11 +10,6 @@
     src: url("../fonts/roboto-mono/RobotoMono-Regular.ttf") format("truetype");
   }
 
-  body {
-    margin: 0;
-    font-weight: 500;
-  }
-
   h1,
   p {
     font-family: "Roboto Mono", monospace;
@@ -60,6 +55,9 @@
   box-sizing: border-box;
 
   body {
+    margin: 0;
+    font-weight: 500;
+
     footer {
       img {
         height: 1em;
