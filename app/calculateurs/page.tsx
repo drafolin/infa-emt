@@ -1,10 +1,9 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import TimePicker from 'react-time-picker';
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import "./style.scss";
-import React from "react";
 React.useLayoutEffect = React.useEffect;
 
 const TEMPS_TRAVAIL_MINIMUM = { hours: 7, minutes: 25 };
@@ -41,6 +40,9 @@ const Travail = () => {
 									format={"HH:mm"}
 									onChange={
 										(v) => {
+											if (typeof v !== "string") {
+												return;
+											}
 											if (!v) {
 												v = "00:00";
 											}
@@ -63,6 +65,9 @@ const Travail = () => {
 											format={"HH:mm"}
 											onChange={
 												(v) => {
+													if (typeof v !== "string") {
+														return;
+													}
 													if (!v) {
 														v = "00:00";
 													}
@@ -82,6 +87,9 @@ const Travail = () => {
 											format={"HH:mm"}
 											onChange={
 												(v) => {
+													if (typeof v !== "string") {
+														return;
+													}
 													if (!v) {
 														v = "00:00";
 													}
@@ -104,6 +112,9 @@ const Travail = () => {
 									format={"HH:mm"}
 									onChange={
 										(v) => {
+											if (typeof v !== "string") {
+												return;
+											}
 											if (!v) {
 												v = "00:00";
 											}
