@@ -42,8 +42,6 @@ const Balai = () => {
 						<h1>Planning du balai</h1>
 					</div>
 				</div>
-			</div>
-			<div className="section">
 				<div className="row row-1">
 					<div className="column">
 						{

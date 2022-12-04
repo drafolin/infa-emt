@@ -3,6 +3,7 @@ import Image from "next/image";
 import imgVueOiseauPorren from "/assets/porrentruy.jpg";
 import juraPaysage from "/assets/juraPaysage.jpg";
 import TypingText from "./typingText";
+import "./welcomestyle.scss";
 
 const Root = () => {
 	return (
