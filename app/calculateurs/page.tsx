@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import TimePicker from 'react-time-picker/dist/entry.nostyle';
+import TimePicker from 'react-time-picker';
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import "./style.scss";
