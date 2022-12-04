@@ -1,6 +1,6 @@
 <script setup lang="ts">
 let fait = ref(new Map<string, boolean[]>());
-let personnes = ref<string[]>();
+let names = ref<string[]>();
 let loaded = ref(false);
 let error = ref(false);
 const main = async () => {
@@ -9,7 +9,7 @@ const main = async () => {
 		for (let [key, value] of Object.entries(done)) {
 			fait.value.set(key, value);
 		}
-		personnes.value = (await $fetch("/api/balai")).body.noms;
+		names.value = (await $fetch("/api/balai")).body.noms;
 	} catch (e) {
 		error.value = true;
 		console.error(e);
@@ -61,15 +61,11 @@ h1 {
 	grid-template-rows: repeat(8, 1fr);
 	text-align: center;
 	align-items: center;
-}
 
-.table {
 	>* {
 		height: fit-content;
 	}
-}
 
-.table {
 	>input {
 		height: 30px;
 	}

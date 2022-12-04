@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model balayer {
+  fk_personne Int
+  fk_semaine  Int
+  personne    personne @relation(fields: [fk_personne], references: [id], onUpdate: Restrict, map: "fk_balayer_personne")
+  semaine     semaine  @relation(fields: [fk_semaine], references: [id], onUpdate: Restrict, map: "fk_balayer_semaine")
+
+  @@id([fk_personne, fk_semaine])
+  @@index([fk_semaine], map: "fk_balayer_semaine")
+}
+
+model personne {
+  id      Int       @id
+  nom     String    @db.VarChar(50)
+  balayer balayer[]
+}
+
+model semaine {
+  id      Int       @id
+  numero  Int
+  balayer balayer[]
+}
