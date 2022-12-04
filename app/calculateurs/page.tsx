@@ -3,6 +3,7 @@ import { useState } from "react";
 import TimePicker from 'react-time-picker/dist/entry.nostyle';
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import "./style.scss";
 import React from "react";
 React.useLayoutEffect = React.useEffect;
 
@@ -37,9 +38,12 @@ const Travail = () => {
 								<TimePicker
 									disableClock
 									value={`${heureArrivee.hours}:${(`${heureArrivee.minutes}`).padStart(2, "0")}`}
-									format={"hh:mm"}
+									format={"HH:mm"}
 									onChange={
 										(v: string) => {
+											if (!v) {
+												v = "00:00";
+											}
 											setHeureArrivee({
 												hours: parseInt(v.split(":")[0]),
 												minutes: parseInt(v.split(":")[1])
@@ -56,9 +60,12 @@ const Travail = () => {
 										<TimePicker
 											disableClock
 											value={`${heureDebutPause.hours}:${`${heureDebutPause.minutes}`.padStart(2, "0")}`}
-											format={"hh:mm"}
+											format={"HH:mm"}
 											onChange={
 												(v: string) => {
+													if (!v) {
+														v = "00:00";
+													}
 													setHeureDebutPause({
 														hours: parseInt(v.split(":")[0]),
 														minutes: parseInt(v.split(":")[1])
@@ -72,9 +79,12 @@ const Travail = () => {
 										<TimePicker
 											disableClock
 											value={`${heureFinPause.hours}:${`${heureFinPause.minutes}`.padStart(2, "0")}`}
-											format={"hh:mm"}
+											format={"HH:mm"}
 											onChange={
 												(v: string) => {
+													if (!v) {
+														v = "00:00";
+													}
 													setHeureFinPause({
 														hours: parseInt(v.split(":")[0]),
 														minutes: parseInt(v.split(":")[1])
@@ -88,11 +98,15 @@ const Travail = () => {
 							<div>
 								<h3>Départ</h3>
 								<TimePicker
+									name="time24"
 									disableClock
 									value={`${heureDepart.hours}:${`${heureDepart.minutes}`.padStart(2, "0")}`}
-									format={"hh:mm"}
+									format={"HH:mm"}
 									onChange={
 										(v: string) => {
+											if (!v) {
+												v = "00:00";
+											}
 											setHeureDepart({
 												hours: parseInt(v.split(":")[0]),
 												minutes: parseInt(v.split(":")[1])
