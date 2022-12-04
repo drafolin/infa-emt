@@ -40,7 +40,7 @@ const Travail = () => {
 									value={`${heureArrivee.hours}:${(`${heureArrivee.minutes}`).padStart(2, "0")}`}
 									format={"HH:mm"}
 									onChange={
-										(v: string) => {
+										(v) => {
 											if (!v) {
 												v = "00:00";
 											}
@@ -62,7 +62,7 @@ const Travail = () => {
 											value={`${heureDebutPause.hours}:${`${heureDebutPause.minutes}`.padStart(2, "0")}`}
 											format={"HH:mm"}
 											onChange={
-												(v: string) => {
+												(v) => {
 													if (!v) {
 														v = "00:00";
 													}
@@ -81,7 +81,7 @@ const Travail = () => {
 											value={`${heureFinPause.hours}:${`${heureFinPause.minutes}`.padStart(2, "0")}`}
 											format={"HH:mm"}
 											onChange={
-												(v: string) => {
+												(v) => {
 													if (!v) {
 														v = "00:00";
 													}
@@ -103,7 +103,7 @@ const Travail = () => {
 									value={`${heureDepart.hours}:${`${heureDepart.minutes}`.padStart(2, "0")}`}
 									format={"HH:mm"}
 									onChange={
-										(v: string) => {
+										(v) => {
 											if (!v) {
 												v = "00:00";
 											}
