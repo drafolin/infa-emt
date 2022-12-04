@@ -1,6 +1,7 @@
 import imgFacadeSud from "/assets/01_CEJEF-DIVTEC_Porrentruy_Burri-P_facade_sud_M.jpg";
 import Image from "next/image";
 import imgVueOiseauPorren from "/assets/porrentruy.jpg";
+import juraPaysage from "/assets/juraPaysage.jpg";
 import TypingText from "./typingText";
 
 const Root = () => {
@@ -59,7 +60,7 @@ const Root = () => {
 						</div>
 						<div className="column">
 							<div className="blurb">
-								<Image src="@/assets/juraPaysage.jpg" alt="Le canton du Jura" />
+								<Image src={juraPaysage} alt="Le canton du Jura" />
 								<h4>JURA</h4>
 								<p>
 									<strong>Le canton du Jura</strong> (JU), officiellement la <strong>république et canton du Jura</strong>,
