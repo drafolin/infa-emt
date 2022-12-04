@@ -1,0 +1,29 @@
+:root {
+  body {
+    main {
+      .section:nth-child(1) {
+        background-blend-mode: color;
+        background-image: url("../assets/CREATE1.png"),
+          linear-gradient(
+            69deg,
+            #3a3a3a 0%,
+            #75726b 17%,
+            #9f9c93 37%,
+            rgba(159, 156, 147, 0.76) 59%,
+            rgba(245, 245, 245, 0.5) 88%
+          );
+        min-height: 651px;
+
+        .row {
+          height: 100%;
+          margin-top: 100px;
+        }
+
+        .column {
+          height: 100%;
+          color: white;
+        }
+      }
+    }
+  }
+}

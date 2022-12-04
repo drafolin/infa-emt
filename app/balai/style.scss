@@ -1,0 +1,23 @@
+h1 {
+  margin-bottom: 0;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: 100px repeat(39, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  text-align: center;
+  align-items: center;
+
+  > * {
+    height: fit-content;
+  }
+
+  > input {
+    height: 30px;
+  }
+}
+
+input[type="checkbox"] {
+  pointer-events: none;
+}

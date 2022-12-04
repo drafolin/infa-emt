@@ -1,0 +1,85 @@
+body {
+  main {
+    .react-time-picker {
+      width: 100%;
+
+      .react-time-picker__wrapper {
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        padding: 6px 12px;
+
+        .react-time-picker__inputGroup {
+          display: flex;
+          align-items: baseline;
+        }
+      }
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .horizontal {
+      &.full-width {
+        :not(div):not(.react-time-picker *) {
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+
+        div {
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        justify-content: space-between;
+      }
+
+      display: flex;
+      flex-direction: row;
+      column-gap: 10px;
+      align-items: center;
+    }
+
+    h1 + h2 + div {
+      max-width: max(calc(100% / 3), 500px);
+
+      div:not(.horizontal) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      > .horizontal {
+        > div {
+          border: solid 1px #8080803d;
+          height: 160px;
+        }
+      }
+    }
+
+    .align-bottom {
+      align-items: flex-end;
+    }
+
+    .resultat {
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .delete {
+      background-color: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      margin: 10px;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  }
+}
