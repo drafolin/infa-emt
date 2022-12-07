@@ -28,154 +28,152 @@ const Travail = () => {
 					<h2>Heures</h2>
 				</div>
 			</div>
-		</div>
-			<div className="section">
-				<div className="row row-1_2">
-					<div className="column">
-						<div>
-							<div className="align-bottom">
-								<div>
-									<h3>Arivée</h3>
-									<TimePicker
-										disableClock
-										value={`${heureArrivee.hours}:${(`${heureArrivee.minutes}`).padStart(2, "0")}`}
-										format={"HH:mm"}
-										onChange={
-											(v) => {
-												if (typeof v !== "string") {
-													return;
-												}
-												if (!v) {
-													v = "00:00";
-												}
-												setHeureArrivee({
-													hours: parseInt(v.split(":")[0]),
-													minutes: parseInt(v.split(":")[1])
-												});
+			<div className="row row-1_2">
+				<div className="column">
+					<div>
+						<div className="align-bottom">
+							<div>
+								<h3>Arivée</h3>
+								<TimePicker
+									disableClock
+									value={`${heureArrivee.hours}:${(`${heureArrivee.minutes}`).padStart(2, "0")}`}
+									format={"HH:mm"}
+									onChange={
+										(v) => {
+											if (typeof v !== "string") {
+												return;
 											}
+											if (!v) {
+												v = "00:00";
+											}
+											setHeureArrivee({
+												hours: parseInt(v.split(":")[0]),
+												minutes: parseInt(v.split(":")[1])
+											});
 										}
-									/>
-								</div>
-								<div className="horizontal full-width">
-									<h3>Pause</h3>
+									}
+								/>
+							</div>
+							<div className="horizontal full-width">
+								<h3>Pause</h3>
+								<div>
 									<div>
-										<div>
-											<h4>Début</h4>
-											<TimePicker
-												disableClock
-												value={`${heureDebutPause.hours}:${`${heureDebutPause.minutes}`.padStart(2, "0")}`}
-												format={"HH:mm"}
-												onChange={
-													(v) => {
-														if (typeof v !== "string") {
-															return;
-														}
-														if (!v) {
-															v = "00:00";
-														}
-														setHeureDebutPause({
-															hours: parseInt(v.split(":")[0]),
-															minutes: parseInt(v.split(":")[1])
-														});
+										<h4>Début</h4>
+										<TimePicker
+											disableClock
+											value={`${heureDebutPause.hours}:${`${heureDebutPause.minutes}`.padStart(2, "0")}`}
+											format={"HH:mm"}
+											onChange={
+												(v) => {
+													if (typeof v !== "string") {
+														return;
 													}
-												}
-											/>
-										</div>
-										<div>
-											<h4>Fin</h4>
-											<TimePicker
-												disableClock
-												value={`${heureFinPause.hours}:${`${heureFinPause.minutes}`.padStart(2, "0")}`}
-												format={"HH:mm"}
-												onChange={
-													(v) => {
-														if (typeof v !== "string") {
-															return;
-														}
-														if (!v) {
-															v = "00:00";
-														}
-														setHeureFinPause({
-															hours: parseInt(v.split(":")[0]),
-															minutes: parseInt(v.split(":")[1])
-														});
+													if (!v) {
+														v = "00:00";
 													}
+													setHeureDebutPause({
+														hours: parseInt(v.split(":")[0]),
+														minutes: parseInt(v.split(":")[1])
+													});
 												}
-											/>
-										</div>
-									</div>
-								</div>
-								<div>
-									<h3>Départ</h3>
-									<TimePicker
-										name="time24"
-										disableClock
-										value={`${heureDepart.hours}:${`${heureDepart.minutes}`.padStart(2, "0")}`}
-										format={"HH:mm"}
-										onChange={
-											(v) => {
-												if (typeof v !== "string") {
-													return;
-												}
-												if (!v) {
-													v = "00:00";
-												}
-												setHeureDepart({
-													hours: parseInt(v.split(":")[0]),
-													minutes: parseInt(v.split(":")[1])
-												});
 											}
-										}
-									/>
+										/>
+									</div>
+									<div>
+										<h4>Fin</h4>
+										<TimePicker
+											disableClock
+											value={`${heureFinPause.hours}:${`${heureFinPause.minutes}`.padStart(2, "0")}`}
+											format={"HH:mm"}
+											onChange={
+												(v) => {
+													if (typeof v !== "string") {
+														return;
+													}
+													if (!v) {
+														v = "00:00";
+													}
+													setHeureFinPause({
+														hours: parseInt(v.split(":")[0]),
+														minutes: parseInt(v.split(":")[1])
+													});
+												}
+											}
+										/>
+									</div>
 								</div>
 							</div>
 							<div>
-								<label>
-									<input type="checkbox" value={`${pauseApresMidi}`} onChange={() => { setPauseApresMidi(!pauseApresMidi); }} />
-									Pause de l&apos;après-midi
-								</label>
+								<h3>Départ</h3>
+								<TimePicker
+									name="time24"
+									disableClock
+									value={`${heureDepart.hours}:${`${heureDepart.minutes}`.padStart(2, "0")}`}
+									format={"HH:mm"}
+									onChange={
+										(v) => {
+											if (typeof v !== "string") {
+												return;
+											}
+											if (!v) {
+												v = "00:00";
+											}
+											setHeureDepart({
+												hours: parseInt(v.split(":")[0]),
+												minutes: parseInt(v.split(":")[1])
+											});
+										}
+									}
+								/>
 							</div>
 						</div>
-					</div>
-					<div className="column resultat">
-						<h3>Resultat</h3>
-						<h4>Travail aujourd&apos;hui</h4>
-						<p>{total / 60 >= 0 ? Math.floor(total / 60) : Math.ceil(total / 60)}h {total % 60}min</p>
-						<div className="center">
-							<h5>Matin</h5>
-							<p>
-								{
-									totalMatin / 60 >= 0 ? Math.floor(totalMatin / 60) : Math.ceil(totalMatin / 60)
-								}h {
-									totalMatin
-									% 60
-								}min
-							</p>
-						</div>
 						<div>
-							<h5>Après-midi</h5>
-							<p>
-								{
-									totalApresMidi / 60 >= 0 ? Math.floor(totalApresMidi / 60) : Math.ceil(totalApresMidi / 60)
-								}h {
-									totalApresMidi % 60
-								}min
-							</p>
+							<label>
+								<input type="checkbox" value={`${pauseApresMidi}`} onChange={() => { setPauseApresMidi(!pauseApresMidi); }} />
+								Pause de l&apos;après-midi
+							</label>
 						</div>
-						<h4>{texteTempsRelatif}</h4>
+					</div>
+				</div>
+				<div className="column resultat">
+					<h3>Resultat</h3>
+					<h4>Travail aujourd&apos;hui</h4>
+					<p>{total / 60 >= 0 ? Math.floor(total / 60) : Math.ceil(total / 60)}h {total % 60}min</p>
+					<div className="center">
+						<h5>Matin</h5>
 						<p>
 							{
-								Math.abs((total - MINUTES_TRAVAIL_MINIMUM) / 60 >= 0
-									? Math.floor((total - MINUTES_TRAVAIL_MINIMUM) / 60)
-									: Math.ceil((total - MINUTES_TRAVAIL_MINIMUM) / 60))
-							}
-							h {
-								Math.abs((total - MINUTES_TRAVAIL_MINIMUM) % 60)
+								totalMatin / 60 >= 0 ? Math.floor(totalMatin / 60) : Math.ceil(totalMatin / 60)
+							}h {
+								totalMatin
+								% 60
 							}min
 						</p>
 					</div>
+					<div>
+						<h5>Après-midi</h5>
+						<p>
+							{
+								totalApresMidi / 60 >= 0 ? Math.floor(totalApresMidi / 60) : Math.ceil(totalApresMidi / 60)
+							}h {
+								totalApresMidi % 60
+							}min
+						</p>
+					</div>
+					<h4>{texteTempsRelatif}</h4>
+					<p>
+						{
+							Math.abs((total - MINUTES_TRAVAIL_MINIMUM) / 60 >= 0
+								? Math.floor((total - MINUTES_TRAVAIL_MINIMUM) / 60)
+								: Math.ceil((total - MINUTES_TRAVAIL_MINIMUM) / 60))
+						}
+						h {
+							Math.abs((total - MINUTES_TRAVAIL_MINIMUM) % 60)
+						}min
+					</p>
 				</div>
 			</div>
+		</div>
 		</>
 	);
 };
@@ -184,6 +182,7 @@ const Moyennes = () => {
 	const [notes, setNotes] = useState<{ note: number, coefficient: number; }[]>([]);
 
 	const addNote = (v: any) => {
+		v.preventDefault();
 		console.log(v);
 	};
 	const removeNote = (index: number) => {
@@ -216,7 +215,7 @@ const Moyennes = () => {
 						<form onSubmit={addNote}>
 							<input type="text" placeholder="Note" v-model="noteText" /> -
 							<input type="text" placeholder="Coefficient" v-model="coeffText" />%
-							<button>Ajouter</button>
+							<button type="button">Ajouter</button>
 						</form>
 						<ul>
 							{
