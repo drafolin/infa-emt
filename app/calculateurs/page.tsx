@@ -22,7 +22,7 @@ const Travail = () => {
 	const texteTempsRelatif = total - MINUTES_TRAVAIL_MINIMUM < 0 ? "Perdu" : "Gagné";
 
 	return (
-		<div className="section">
+		<><div className="section">
 			<div className="row row-1">
 				<div className="column">
 					<h2>Heures</h2>
@@ -174,6 +174,7 @@ const Travail = () => {
 				</div>
 			</div>
 		</div>
+		</>
 	);
 };
 
@@ -181,6 +182,7 @@ const Moyennes = () => {
 	const [notes, setNotes] = useState<{ note: number, coefficient: number; }[]>([]);
 
 	const addNote = (v: any) => {
+		v.preventDefault();
 		console.log(v);
 	};
 	const removeNote = (index: number) => {
@@ -213,7 +215,7 @@ const Moyennes = () => {
 						<form onSubmit={addNote}>
 							<input type="text" placeholder="Note" v-model="noteText" /> -
 							<input type="text" placeholder="Coefficient" v-model="coeffText" />%
-							<button>Ajouter</button>
+							<button type="button">Ajouter</button>
 						</form>
 						<ul>
 							{
