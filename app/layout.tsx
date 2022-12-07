@@ -33,7 +33,7 @@ export default function RootLayout({
 								<Link href="/liens">Liens utiles</Link>
 							</li>
 							<li>
-								<Link href="menus.emt-infa.ch/">Menus de la cantine</Link>
+								<Link href="https://menus.emt-infa.ch/">Menus de la cantine</Link>
 							</li>
 						</ul>
 					</nav>
