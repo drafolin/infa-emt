@@ -1,10 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import TimePicker from 'react-time-picker';
-import "react-time-picker/dist/TimePicker.css";
-import "react-clock/dist/Clock.css";
+import TimePicker from 'react-time-picker-field';
 import "./style.scss";
-React.useLayoutEffect = React.useEffect;
+import "react-time-picker-field/dist/index.css";
 
 const TEMPS_TRAVAIL_MINIMUM = { hours: 7, minutes: 25 };
 const MINUTES_TRAVAIL_MINIMUM = TEMPS_TRAVAIL_MINIMUM.hours * 60 + TEMPS_TRAVAIL_MINIMUM.minutes;
@@ -35,9 +33,7 @@ const Travail = () => {
 							<div>
 								<h3>Arivée</h3>
 								<TimePicker
-									disableClock
 									value={`${heureArrivee.hours}:${(`${heureArrivee.minutes}`).padStart(2, "0")}`}
-									format={"HH:mm"}
 									onChange={
 										(v) => {
 											if (typeof v !== "string") {
@@ -60,9 +56,7 @@ const Travail = () => {
 									<div>
 										<h4>Début</h4>
 										<TimePicker
-											disableClock
 											value={`${heureDebutPause.hours}:${`${heureDebutPause.minutes}`.padStart(2, "0")}`}
-											format={"HH:mm"}
 											onChange={
 												(v) => {
 													if (typeof v !== "string") {
@@ -82,9 +76,7 @@ const Travail = () => {
 									<div>
 										<h4>Fin</h4>
 										<TimePicker
-											disableClock
 											value={`${heureFinPause.hours}:${`${heureFinPause.minutes}`.padStart(2, "0")}`}
-											format={"HH:mm"}
 											onChange={
 												(v) => {
 													if (typeof v !== "string") {
@@ -106,10 +98,7 @@ const Travail = () => {
 							<div>
 								<h3>Départ</h3>
 								<TimePicker
-									name="time24"
-									disableClock
 									value={`${heureDepart.hours}:${`${heureDepart.minutes}`.padStart(2, "0")}`}
-									format={"HH:mm"}
 									onChange={
 										(v) => {
 											if (typeof v !== "string") {
