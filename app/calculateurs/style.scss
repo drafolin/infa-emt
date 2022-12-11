@@ -1,32 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   main {
-    .react-time-picker {
-      width: 100%;
-
-      .react-time-picker__wrapper {
-        border-radius: 4px;
-        border: 1px solid #ddd;
-        padding: 6px 12px;
-
-        .react-time-picker__inputGroup {
-          display: flex;
-          align-items: baseline;
-        }
-      }
-    }
-
     .full-width {
       width: 100%;
     }
 
     .horizontal {
       &.full-width {
-        :not(div):not(.react-time-picker *) {
+        :not(div):not(.rtpf *) {
           margin-left: 10px;
           margin-right: 10px;
         }
 
-        div {
+        > div {
           width: 100%;
           margin-left: 0;
           margin-right: 0;
